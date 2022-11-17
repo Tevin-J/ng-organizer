@@ -10,4 +10,8 @@ export class SelectorComponent implements OnInit {
   constructor(public dateService: DateService) {}
 
   ngOnInit(): void {}
+
+  go(dir: number) {
+    this.dateService.changeMonth(dir);
+  }
 }
