@@ -1,5 +1,5 @@
-import { Task, TasksService } from './../shared/tasks.service';
-import { DateService } from './../shared/date.service';
+import { Task, TasksService } from '../shared/tasks.service';
+import { DateService } from '../shared/date.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, of, tap } from 'rxjs';
@@ -29,10 +29,11 @@ export class OrganizerComponent implements OnInit {
       date: this.dateService.date$.value.format('DD-MM-YYYY'),
     };
     this.tasksService.create(task).pipe(
-      tap(() => {
-        this.form.reset;
+      tap((task) => {
+        console.log('created data', task);
+        this.form.reset();
       }),
-      catchError((error) => of(`submit error: ${error}`))
-    );
+      catchError(error => of(error))
+    ).subscribe();
   }
 }

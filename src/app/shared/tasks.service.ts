@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap, catchError, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface Task {
   title: string;
@@ -12,10 +12,10 @@ export interface Task {
   providedIn: 'root',
 })
 export class TasksService {
-  static databaseUri = '';
+  static backendUrl = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
   create(task: Task): Observable<Task> {
-    return this.http.post<any>(`${TasksService.databaseUri}`, task);
+    return this.http.post<any>(`${TasksService.backendUrl}/create`, task);
   }
 }
